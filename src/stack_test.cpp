@@ -5,9 +5,9 @@
 
 int main(void)
 {
-    stack_t swag = {.name = "meow", .state = STACK_STATE_UNINITIALIZED};
+    stack_t swag = {};
 
-    StackInit(&swag, 3);
+    StackInit(&swag, 3, "meow_stack");
 
     StackPush(&swag, 2);
     StackPush(&swag, 4);
@@ -25,6 +25,7 @@ int main(void)
     StackPop(&swag, &x);
     StackPop(&swag, &x);
     StackPop(&swag, &x);
+
     StackDump(&swag);
 
     StackDestroy(&swag);

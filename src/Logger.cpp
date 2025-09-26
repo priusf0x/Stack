@@ -98,7 +98,7 @@ StackDump(stack_t* swag)
         {
             if (index <= swag->size)
             {
-                fprintf(log_file, "[%zu ELEMENT] %d \n", index, (swag->stack_data)[index - 1]);
+                fprintf(log_file, "[%zu ELEMENT] %d \n", index, (swag->stack_data)[index]);
             }
             else
             {
