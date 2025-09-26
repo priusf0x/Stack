@@ -27,10 +27,11 @@ enum stack_state_e
 
 typedef struct swag
 {
+    const char* name;
     value_type* stack_data;
     size_t size;
     size_t capacity;
-    enum stack_state_e state = STACK_STATE_UNINITIALIZED;
+    enum stack_state_e state;
 } stack_t;
 
 stack_function_errors_e StackInit(stack_t* swag, size_t count);
@@ -38,7 +39,6 @@ stack_function_errors_e StackDestroy(stack_t* swag);
 stack_function_errors_e StackPush(stack_t* swag, value_type value);
 stack_function_errors_e StackPop(stack_t* swag, value_type* pop_variable);
 stack_function_errors_e VerifyStack(stack_t* swag);
-stack_function_errors_e StackDump(stack_t* swag);
 
 #ifdef HARD_SWAG
 #define VERIFY_STACK(X)

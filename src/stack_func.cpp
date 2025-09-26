@@ -107,13 +107,3 @@ VerifyStack(stack_t* swag)
     return STACK_FUNCTION_SUCCESS;
 }
 
-stack_function_errors_e
-StackDump(stack_t* swag)
-{
-    if (swag == NULL)
-    {
-        LOGSHIT(DETALIZATION_LEVEL_DEBUG, "No such stack-variable was detected.");
-    }
-
-    return STACK_FUNCTION_SUCCESS;
-}

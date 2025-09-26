@@ -11,3 +11,192 @@
 -------------------------------------
 
  <11:09:38> swag
+-------------------------------------
+
+ <17:12:15> 
+name = default_name.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+
+-------------------------------------
+
+ <17:12:51> 
+name = (null).
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+
+-------------------------------------
+
+ <17:13:35> 
+name = (null).
+size = 0.
+capacity = 0.
+state = OK.
+----------DATA----------
+
+-------------------------------------
+
+ <17:14:44> 
+name = default_name.
+size = 0.
+capacity = 0.
+state = UNINITIALIZED.
+----------DATA----------
+
+-------------------------------------
+
+ <17:46:25> 
+name = default_name.
+size = 0.
+capacity = 0.
+state = UNINITIALIZED.
+----------DATA----------
+
+-------------------------------------
+
+ <17:46:34> 
+name = default_name.
+size = 0.
+capacity = 0.
+state = UNINITIALIZED.
+----------DATA----------
+
+-------------------------------------
+
+ <17:46:49> 
+name = default_name.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG[2 ELEMENT] SWAAAAG[3 ELEMENT] SWAAAAG[4 ELEMENT] SWAAAAG[5 ELEMENT] SWAAAAG[6 ELEMENT] SWAAAAG
+-------------------------------------
+
+ <17:47:44> 
+name = default_name.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG[2 ELEMENT] SWAAAAG[3 ELEMENT] SWAAAAG[4 ELEMENT] SWAAAAG[5 ELEMENT] SWAAAAG[6 ELEMENT] SWAAAAG
+-------------------------------------
+
+ <17:47:58> 
+name = default_name.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG[2 ELEMENT] SWAAAAG[3 ELEMENT] SWAAAAG[4 ELEMENT] SWAAAAG[5 ELEMENT] SWAAAAG[6 ELEMENT] SWAAAAG
+-------------------------------------
+
+ <17:48:21> 
+name = default_name.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG 
+[2 ELEMENT] SWAAAAG 
+[3 ELEMENT] SWAAAAG 
+[4 ELEMENT] SWAAAAG 
+[5 ELEMENT] SWAAAAG 
+[6 ELEMENT] SWAAAAG 
+
+-------------------------------------
+
+ <17:49:27> 
+name = default_name.
+size = 4.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] 4 
+[2 ELEMENT] 5 
+[3 ELEMENT] 2 
+[4 ELEMENT] -1094795586 
+[5 ELEMENT] SWAAAAG 
+[6 ELEMENT] SWAAAAG 
+
+ <17:49:27> 
+name = default_name.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG 
+[2 ELEMENT] SWAAAAG 
+[3 ELEMENT] SWAAAAG 
+[4 ELEMENT] SWAAAAG 
+[5 ELEMENT] SWAAAAG 
+[6 ELEMENT] SWAAAAG 
+
+-------------------------------------
+
+ <17:51:07> 
+name = default_name.
+size = 3.
+capacity = 3.
+state = OK.
+----------DATA----------
+[1 ELEMENT] 2 
+[2 ELEMENT] 4 
+[3 ELEMENT] 5 
+
+ <17:51:07> 
+name = default_name.
+size = 0.
+capacity = 3.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG 
+[2 ELEMENT] SWAAAAG 
+[3 ELEMENT] SWAAAAG 
+
+-------------------------------------
+
+ <17:51:39> 
+name = meow.
+size = 6.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] 2 
+[2 ELEMENT] 4 
+[3 ELEMENT] 5 
+[4 ELEMENT] 2 
+[5 ELEMENT] 4 
+[6 ELEMENT] 5 
+
+ <17:51:39> 
+name = meow.
+size = 0.
+capacity = 6.
+state = OK.
+----------DATA----------
+[1 ELEMENT] SWAAAAG 
+[2 ELEMENT] SWAAAAG 
+[3 ELEMENT] SWAAAAG 
+[4 ELEMENT] SWAAAAG 
+[5 ELEMENT] SWAAAAG 
+[6 ELEMENT] SWAAAAG 
+
+-------------------------------------
+
+ <17:52:00> 
+name = meow.
+size = 0.
+capacity = 0.
+state = UNINITIALIZED.
+----------DATA----------
+
+ <17:52:00> 
+name = meow.
+size = 0.
+capacity = 0.
+state = UNINITIALIZED.
+----------DATA----------
