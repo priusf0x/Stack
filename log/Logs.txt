@@ -1,209 +1,7 @@
 
 -------------------------------------
 
--------------------------------------
-
--------------------------------------
-
--------------------------------------
-
- <11:07:55> meow
--------------------------------------
-
- <11:09:38> swag
--------------------------------------
-
- <17:12:15> 
-name = default_name.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-
--------------------------------------
-
- <17:12:51> 
-name = (null).
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-
--------------------------------------
-
- <17:13:35> 
-name = (null).
-size = 0.
-capacity = 0.
-state = OK.
-----------DATA----------
-
--------------------------------------
-
- <17:14:44> 
-name = default_name.
-size = 0.
-capacity = 0.
-state = UNINITIALIZED.
-----------DATA----------
-
--------------------------------------
-
- <17:46:25> 
-name = default_name.
-size = 0.
-capacity = 0.
-state = UNINITIALIZED.
-----------DATA----------
-
--------------------------------------
-
- <17:46:34> 
-name = default_name.
-size = 0.
-capacity = 0.
-state = UNINITIALIZED.
-----------DATA----------
-
--------------------------------------
-
- <17:46:49> 
-name = default_name.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG[2 ELEMENT] SWAAAAG[3 ELEMENT] SWAAAAG[4 ELEMENT] SWAAAAG[5 ELEMENT] SWAAAAG[6 ELEMENT] SWAAAAG
--------------------------------------
-
- <17:47:44> 
-name = default_name.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG[2 ELEMENT] SWAAAAG[3 ELEMENT] SWAAAAG[4 ELEMENT] SWAAAAG[5 ELEMENT] SWAAAAG[6 ELEMENT] SWAAAAG
--------------------------------------
-
- <17:47:58> 
-name = default_name.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG[2 ELEMENT] SWAAAAG[3 ELEMENT] SWAAAAG[4 ELEMENT] SWAAAAG[5 ELEMENT] SWAAAAG[6 ELEMENT] SWAAAAG
--------------------------------------
-
- <17:48:21> 
-name = default_name.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <17:49:27> 
-name = default_name.
-size = 4.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] 4 
-[2 ELEMENT] 5 
-[3 ELEMENT] 2 
-[4 ELEMENT] -1094795586 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-
- <17:49:27> 
-name = default_name.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <17:51:07> 
-name = default_name.
-size = 3.
-capacity = 3.
-state = OK.
-----------DATA----------
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-
- <17:51:07> 
-name = default_name.
-size = 0.
-capacity = 3.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <17:51:39> 
-name = meow.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-
- <17:51:39> 
-name = meow.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] SWAAAAG 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <17:52:00> 
-name = meow.
-size = 0.
-capacity = 0.
-state = UNINITIALIZED.
-----------DATA----------
-
- <17:52:00> 
-name = meow.
-size = 0.
-capacity = 0.
-state = UNINITIALIZED.
-----------DATA----------
-
--------------------------------------
-
- <01:09:56> 
+ <02:58:34> 
 name = meow_stack.
 size = 6.
 capacity = 6.
@@ -216,7 +14,7 @@ state = OK.
 [5 ELEMENT] 4 
 [6 ELEMENT] 5 
 
- <01:09:56> 
+ <02:58:34> 
 name = meow_stack.
 size = 0.
 capacity = 6.
@@ -231,20 +29,20 @@ state = OK.
 
 -------------------------------------
 
- <02:32:00> 
+ <02:59:05> 
 name = meow_stack.
 size = 6.
 capacity = 6.
 state = OK.
 ----------DATA----------
-[1 ELEMENT] 228822 
-[2 ELEMENT] 2 
-[3 ELEMENT] 4 
-[4 ELEMENT] 5 
-[5 ELEMENT] 2 
-[6 ELEMENT] 4 
+[1 ELEMENT] 2 
+[2 ELEMENT] 4 
+[3 ELEMENT] 5 
+[4 ELEMENT] 2 
+[5 ELEMENT] 4 
+[6 ELEMENT] 5 
 
- <02:32:00> 
+ <02:59:05> 
 name = meow_stack.
 size = 0.
 capacity = 6.
@@ -259,7 +57,7 @@ state = OK.
 
 -------------------------------------
 
- <02:33:28> 
+ <02:59:09> 
 name = meow_stack.
 size = 6.
 capacity = 6.
@@ -272,7 +70,7 @@ state = OK.
 [5 ELEMENT] 4 
 [6 ELEMENT] 5 
 
- <02:33:28> 
+ <02:59:09> 
 name = meow_stack.
 size = 0.
 capacity = 6.
@@ -287,231 +85,7 @@ state = OK.
 
 -------------------------------------
 
- <02:34:33> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-[7 ELEMENT] SWAAAAG 
-
- <02:34:33> 
-name = meow_stack.
-size = 1.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-[7 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <02:35:18> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] SWAAAAG 
-[1 ELEMENT] SWAAAAG 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-[7 ELEMENT] SWAAAAG 
-
- <02:35:18> 
-name = meow_stack.
-size = 1.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] SWAAAAG 
-[1 ELEMENT] SWAAAAG 
-[2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-[7 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <02:35:35> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-[7 ELEMENT] 228822 
-
- <02:35:35> 
-name = meow_stack.
-size = 1.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 0 
-[3 ELEMENT] 0 
-[4 ELEMENT] 0 
-[5 ELEMENT] 0 
-[6 ELEMENT] 0 
-[7 ELEMENT] 228822 
-
--------------------------------------
-
- <02:35:57> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-[7 ELEMENT] 228822 
-
- <02:35:57> 
-name = meow_stack.
-size = 1.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 0 
-[3 ELEMENT] 0 
-[4 ELEMENT] 0 
-[5 ELEMENT] 0 
-[6 ELEMENT] 0 
-[7 ELEMENT] 228822 
-
--------------------------------------
-
- <02:36:17> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-[7 ELEMENT] 228822 
-
- <02:36:17> 
-name = meow_stack.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 0 
-[2 ELEMENT] 0 
-[3 ELEMENT] 0 
-[4 ELEMENT] 0 
-[5 ELEMENT] 0 
-[6 ELEMENT] 0 
-[7 ELEMENT] 228822 
-
--------------------------------------
-
- <02:37:00> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-[7 ELEMENT] 228822 
-
- <02:37:00> 
-name = meow_stack.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 0 
-[2 ELEMENT] 0 
-[3 ELEMENT] 0 
-[4 ELEMENT] 0 
-[5 ELEMENT] 0 
-[6 ELEMENT] 0 
-[7 ELEMENT] 228822 
-
--------------------------------------
-
- <02:38:57> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-[7 ELEMENT] 228822 
-
- <02:38:57> 
-name = meow_stack.
-size = 0.
-capacity = 6.
-state = OK.
-----------DATA----------
-[0 ELEMENT] 228822 
-[1 ELEMENT] 0 
-[2 ELEMENT] 0 
-[3 ELEMENT] 0 
-[4 ELEMENT] 0 
-[5 ELEMENT] 0 
-[6 ELEMENT] 0 
-[7 ELEMENT] 228822 
-
--------------------------------------
-
- <02:39:55> 
+ <03:00:06> 
 name = meow_stack.
 size = 6.
 capacity = 6.
@@ -524,7 +98,7 @@ state = OK.
 [5 ELEMENT] 4 
 [6 ELEMENT] 5 
 
- <02:39:55> 
+ <03:00:06> 
 name = meow_stack.
 size = 0.
 capacity = 6.
@@ -532,34 +106,6 @@ state = OK.
 ----------DATA----------
 [1 ELEMENT] SWAAAAG 
 [2 ELEMENT] SWAAAAG 
-[3 ELEMENT] SWAAAAG 
-[4 ELEMENT] SWAAAAG 
-[5 ELEMENT] SWAAAAG 
-[6 ELEMENT] SWAAAAG 
-
--------------------------------------
-
- <02:40:23> 
-name = meow_stack.
-size = 6.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
-[3 ELEMENT] 5 
-[4 ELEMENT] 2 
-[5 ELEMENT] 4 
-[6 ELEMENT] 5 
-
- <02:40:23> 
-name = meow_stack.
-size = 2.
-capacity = 6.
-state = OK.
-----------DATA----------
-[1 ELEMENT] 2 
-[2 ELEMENT] 4 
 [3 ELEMENT] SWAAAAG 
 [4 ELEMENT] SWAAAAG 
 [5 ELEMENT] SWAAAAG 

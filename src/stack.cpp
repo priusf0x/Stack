@@ -28,11 +28,11 @@ StackInit(stack_t*    swag,
         return STACK_FUNCTION_MEMORY_ERROR;
     }
 
-    (swag->stack_data)[0] = POLTORASHKA;
-    (swag->stack_data)[swag->capacity + 1] = POLTORASHKA;
-
     swag->capacity = expected_capacity;
     swag->state = STACK_STATE_OK;
+
+    (swag->stack_data)[0] = POLTORASHKA;
+    (swag->stack_data)[swag->capacity + 1] = POLTORASHKA;
 
     return STACK_FUNCTION_SUCCESS;
 }
@@ -102,10 +102,6 @@ VerifyStack(stack_t* swag)
     {
         return STACK_FUNCTION_UNINITIALIZED_ERROR;
     }
-    else if ((swag->state) == STACK_STATE_UNINITIALIZED)
-    {
-        return STACK_FUNCTION_MEMORY_ERROR;
-    }
     else if (((swag->state) == STACK_STATE_ZERO_CAPACITY) || (swag->capacity) == 0)
     {
         (swag->state) = STACK_STATE_ZERO_CAPACITY;
@@ -114,6 +110,11 @@ VerifyStack(stack_t* swag)
     else if ((swag->stack_data) == NULL)
     {
         return STACK_FUNCTION_NULL_POINTER_ERROR;
+    }
+    else if (((swag->stack_data)[0] != POLTORASHKA) || ((swag->stack_data)[swag->capacity + 1] != POLTORASHKA))
+    {
+        StackDump(swag);
+        return STACK_FUNCTION_MEMORY_ERROR;
     }
     return STACK_FUNCTION_SUCCESS;
 }
