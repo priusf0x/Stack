@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #include "Assert.h"
-#include "Logger.h"
+#include "logger.h"
 
 stack_function_errors_e
 StackInit(stack_t*    swag,

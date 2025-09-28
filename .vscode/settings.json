@@ -21,6 +21,8 @@
         "stop_token": "cpp",
         "text_encoding": "cpp",
         "type_traits": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "bitset": "cpp",
+        "*.inc": "cpp"
     }
 }

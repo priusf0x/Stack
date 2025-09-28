@@ -2,6 +2,7 @@
 #define STACK_H
 
 #include <stdlib.h>
+#include "logger.h"
 
 typedef int value_type;
 
@@ -9,14 +10,15 @@ const int POLTORASHKA = 228822;
 
 enum stack_function_errors_e
 {
-    STACK_FUNCTION_SUCCESS,
-    STACK_FUNCTION_INITIALIZATION_ERROR,
-    STACK_FUNCTION_UNINITIALIZED_ERROR,
-    STACK_FUNCTION_NULL_POINTER_ERROR,
-    STACK_FUNCTION_MEMORY_ERROR,
-    STACK_FUNCTION_ZERO_CAPACITY,
-    STACK_FUNCTION_INCORRECT_VALUE_ERROR,
-    STACK_FUNCTION_EMPTY_STACK_ERROR
+    STACK_FUNCTION_SUCCESS = 0,
+    STACK_FUNCTION_INITIALIZATION_ERROR = 1,
+    STACK_FUNCTION_UNINITIALIZED_ERROR = 2,
+    STACK_FUNCTION_NULL_POINTER_ERROR = 3,
+    STACK_FUNCTION_MEMORY_ERROR = 4,
+    STACK_FUNCTION_ZERO_CAPACITY = 5,
+    STACK_FUNCTION_INCORRECT_VALUE_ERROR = 6,
+    STACK_FUNCTION_EMPTY_STACK_ERROR = 7,
+    STACK_FUNCTION_NOT_ENOUGH_ELEMENTS = 8
 };
 
 enum stack_state_e
@@ -41,12 +43,13 @@ stack_function_errors_e StackDestroy(stack_t* swag);
 stack_function_errors_e StackPush(stack_t* swag, value_type value);
 stack_function_errors_e StackPop(stack_t* swag, value_type* pop_variable);
 stack_function_errors_e VerifyStack(stack_t* swag);
+
 void* recalloc(void*  pointer, size_t current_size, size_t new_size);
 
 #ifdef HARD_SWAG
 #define VERIFY_STACK_WITH_RETURN(X)
 #else
-#define VERIFY_STACK_WITH_RETURN(X) if (VerifyStack(X) != STACK_FUNCTION_SUCCESS) {printf("Stack error in %d line in file %s \n", __LINE__, __FILE__);return VerifyStack(X);}
+#define VERIFY_STACK_WITH_RETURN(X) if (VerifyStack(X) != STACK_FUNCTION_SUCCESS) {LOGSHIT(DETALIZATION_LEVEL_ERROR, "STACK_ERROR %d with %s was occupied", VerifyStack(X), X->name);return VerifyStack(X);}
 #endif
 
 #define VAR_NAME(X) #X

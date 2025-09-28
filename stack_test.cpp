@@ -1,13 +1,15 @@
 #include <stdio.h>
 
 #include "stack.h"
-#include "Logger.h"
+#include "logger.h"
 
 int main(void)
 {
     stack_t swag = {};
 
     StackInit(&swag, 3, "meow_stack");
+
+    swag.stack_data[0] = 1;
 
     StackPush(&swag, 2);
     StackPush(&swag, 4);

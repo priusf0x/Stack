@@ -1,9 +1,10 @@
-#include "Logger.h"
+#include "logger.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "stack.h"
+
 
 const size_t LOG_BUFFER_SIZE = 100;
 static enum detalization_levels_e DETALIZATION_LEVEL = DETALIZATION_LEVEL_DEBUG;

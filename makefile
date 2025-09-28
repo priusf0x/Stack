@@ -1,4 +1,4 @@
-SOURCES = stack_test.cpp stack.cpp Logger.cpp
+SOURCES =  logger.cpp scanf.cpp main.cpp stack.cpp calculator.cpp
 
 OBJ_DIR = obj
 SOURCE_DIR = src
