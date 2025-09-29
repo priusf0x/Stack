@@ -31,4 +31,4 @@ log_function_return_value_e StackDump(struct stack_t* swag);
 
  #define LOGSHIT(det_level, ...) snprintf(LOG_BUFFER, LOG_BUFFER_SIZE, __VA_ARGS__); LogMessage(LOG_BUFFER, det_level);
 
-#endif
+#endif //LOGGER_H

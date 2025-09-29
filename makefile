@@ -1,4 +1,4 @@
-SOURCES =  logger.cpp scanf.cpp main.cpp stack.cpp calculator.cpp
+SOURCES =  logger.cpp scan_user_input.cpp main.cpp stack.cpp calculator.cpp
 
 OBJ_DIR = obj
 SOURCE_DIR = src

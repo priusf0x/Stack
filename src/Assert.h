@@ -9,5 +9,5 @@ if (!(X)) { fprintf(stderr ,"ERROR(" #X ") in %d line in file %s", __LINE__, __F
 #define ASSERT(X)
 #endif
 
-#endif
+#endif //ASSERT_H
 

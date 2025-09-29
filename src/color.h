@@ -8,4 +8,4 @@
 #define WHITE "\033[97m"
 #define GREEN "\033[32m"
 
-#endif
+#endif //COLOR_H

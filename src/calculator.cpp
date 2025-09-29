@@ -4,7 +4,7 @@
 
 #include "Assert.h"
 #include "color.h"
-#include "scanf.h"
+#include "scan_user_input.h"
 #include "logger.h"
 #include "stack.h"
 

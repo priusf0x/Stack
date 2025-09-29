@@ -54,4 +54,4 @@ void* recalloc(void*  pointer, size_t current_size, size_t new_size);
 
 #define VAR_NAME(X) #X
 
-#endif
+#endif //STACK_H

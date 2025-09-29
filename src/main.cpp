@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "stack.h"
-#include "scanf.h"
+#include "scan_user_input.h"
 #include "calculator.h"
 
 int main(void)

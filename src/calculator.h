@@ -32,4 +32,4 @@ void                    PrintOut(stack_t* calculator_stack);
 #define VERIFY_FUNCTION(X) if (X != STACK_FUNCTION_SUCCESS) {LOGSHIT(DETALIZATION_LEVEL_ERROR, "STACK_FUNCTION_ERROR %d was occupied in line %d in %s.", X, __LINE__, __FILE__);}
 #endif
 
-#endif
+#endif //CALCULATOR_H
