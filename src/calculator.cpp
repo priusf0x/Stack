@@ -4,6 +4,7 @@
 
 #include "Assert.h"
 #include "color.h"
+#include "errno.h"
 #include "scan_user_input.h"
 #include "logger.h"
 #include "stack.h"
@@ -78,7 +79,11 @@ stack_function_errors_e StartCalculator(stack_t* calculator_stack)
                 input_command = CALCULATOR_COMMAND_START;
                 break;
 
-            default: break;
+            default:
+                fprintf(stderr, RED "Some **** was happened.\n" STANDARD);
+                errno = EIO;
+                exit(EXIT_FAILURE);
+                break;
         }
     }
 

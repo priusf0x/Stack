@@ -5,6 +5,7 @@
 
 #include "Assert.h"
 #include "logger.h"
+#include "tools.h"
 
 stack_function_errors_e
 StackInit(stack_t*    swag,
@@ -119,12 +120,3 @@ VerifyStack(stack_t* swag)
     return STACK_FUNCTION_SUCCESS;
 }
 
-void* recalloc(void*  pointer,
-               size_t current_size,
-               size_t new_size)
-{
-    pointer = realloc(pointer, new_size);
-    memset((char*) pointer + current_size, 0, new_size - current_size);
-
-    return pointer;
-}
