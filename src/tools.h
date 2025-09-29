@@ -5,5 +5,6 @@
 #include "string.h"
 
 void* recalloc(void*  pointer, size_t current_size, size_t new_size);
+void PrintHelloMessage();
 
 #endif //TOOLS_H
