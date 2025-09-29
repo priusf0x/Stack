@@ -1,0 +1,4 @@
+.vscode
+obj
+stack_test.out
+stack_test.cpp
