@@ -7,7 +7,9 @@
 #include "logger.h"
 #include "tools.h"
 
-#define HARD_SWAG
+const char CANARY_SIZE = 3;
+const byte_t CANARY_FILL = 42;
+const long long CANARY_FILL_8B = 0b0010101000101010001010100010101000101010001010100010101000101010;
 
 stack_function_errors_e
 StackInit(stack_t*    swag,
@@ -121,6 +123,20 @@ StackPop(stack_t*    swag,
     return STACK_FUNCTION_SUCCESS;
 }
 
+bool
+CheckCanary(stack_t* swag)
+{
+    for (size_t index = 0; index < CANARY_SIZE; index++)
+    {
+        if ((((long long*) swag->canary_start)[index] != CANARY_FILL_8B) || (((long long*) swag->canary_end)[index] != CANARY_FILL_8B))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 stack_function_errors_e
 VerifyStack(stack_t* swag)
 {
@@ -137,11 +153,11 @@ VerifyStack(stack_t* swag)
     {
         return STACK_FUNCTION_NULL_POINTER_ERROR;
     }
-    // else if (((swag->stack_data)[0] != POLTORASHKA) || ((swag->stack_data)[swag->capacity + 1] != POLTORASHKA)) //ХУЙНЯ-ПЕРЕДЕЛЫВАЙ
-    // {
-    //     StackDump(swag);
-    //     return STACK_FUNCTION_MEMORY_ERROR;
-    // }
+    else if (!CheckCanary(swag))
+    {
+        StackDump(swag);
+        return STACK_FUNCTION_MEMORY_ERROR;
+    }
     return STACK_FUNCTION_SUCCESS;
 }
 

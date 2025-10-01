@@ -8,9 +8,6 @@
 
 typedef int value_type;
 
-const char CANARY_SIZE = 1;
-const int CANARY_FILL = 42;
-
 enum stack_function_errors_e
 {
     STACK_FUNCTION_SUCCESS = 0,
@@ -49,6 +46,7 @@ stack_function_errors_e StackDestroy(stack_t* swag);
 stack_function_errors_e StackPush(stack_t* swag, value_type value);
 stack_function_errors_e StackPop(stack_t* swag, value_type* pop_variable);
 stack_function_errors_e VerifyStack(stack_t* swag);
+bool                    CheckCanary(stack_t* swag);
 
 #ifdef HARD_SWAG
 #define VERIFY_STACK_WITH_RETURN(X)

@@ -14,7 +14,7 @@ int main(void)
 
     StackInit(&calculator_stack, 3, "calculator_stack");
 
-    // StartCalculator(&calculator_stack);
+    StartCalculator(&calculator_stack);
 
     StackDump(&calculator_stack);
 
