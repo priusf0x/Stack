@@ -23,6 +23,7 @@ $(TARGET): $(OBJECTS)
 
 $(OBJ_DIR)/%.o: $(SOURCE_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(dir $@)
+	@mkdir -p logs
 	@echo "Compiling" $<
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Compiled Successfully" $<
@@ -30,4 +31,5 @@ $(OBJ_DIR)/%.o: $(SOURCE_DIR)/%.cpp $(HEADERS)
 clean:
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(TARGET)
+	@rm -rf logs
 	@echo "Cleaned Successfully"

@@ -3,6 +3,7 @@
 #include "stack.h"
 #include "logger.h"
 
+
 int main(void)
 {
     stack_t swag = {};

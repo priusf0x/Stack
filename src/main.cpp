@@ -12,9 +12,11 @@ int main(void)
 
     PrintHelloMessage();
 
-    StackInit(&calculator_stack, 8, "calculator_stack");
+    StackInit(&calculator_stack, 3, "calculator_stack");
 
-    StartCalculator(&calculator_stack);
+    // StartCalculator(&calculator_stack);
+
+    StackDump(&calculator_stack);
 
     StackDestroy(&calculator_stack);
 

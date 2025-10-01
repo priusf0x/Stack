@@ -92,15 +92,15 @@ stack_function_errors_e StartCalculator(stack_t* calculator_stack)
 
 void PrintOut(stack_t* calculator_stack)
 {
-    for (size_t index = 1; index <= calculator_stack->capacity; index++)
+    for (size_t index = 0; index < calculator_stack->capacity; index++)
         {
-            if (index <= calculator_stack->size)
+            if (index < calculator_stack->size)
             {
-                printf(GREEN "[%zu ELEMENT] %d \n" STANDARD, index, (calculator_stack->stack_data)[index]);
+                printf(GREEN "[%zu ELEMENT] %d \n" STANDARD, index + 1, (calculator_stack->stack_data)[index]);
             }
             else
             {
-                printf(RED"[%zu ELEMENT] NOTHING_HERE \n" STANDARD, index);
+                printf(RED"[%zu ELEMENT] NOTHING_HERE \n" STANDARD, index + 1);
             }
         }
 }

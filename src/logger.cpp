@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "stack.h"
+#include "tools.h"
 
 
 const size_t LOG_BUFFER_SIZE = 100;
@@ -71,6 +72,10 @@ StackDump(stack_t* swag)
         fprintf(log_file, "name = %s.\n", swag->name);
         fprintf(log_file, "size = %zu.\n", swag->size);
         fprintf(log_file, "capacity = %zu.\n", swag->capacity);
+        fprintf(log_file, "real_capacity = %zu bytes.\n", swag->real_capacity_in_bytes);
+        fprintf(log_file, "canary_start = %p.\n", swag->canary_start);
+        fprintf(log_file, "stack_data = %p.\n", swag->stack_data);
+        fprintf(log_file, "canary_end = %p.\n", swag->canary_end);
 
         switch(swag->state)
         {
@@ -95,19 +100,17 @@ StackDump(stack_t* swag)
 
         fprintf(log_file, "----------DATA----------\n");
 
-        for (size_t index = 1; index <= swag->capacity; index++)
+        for (size_t index = 0; index < swag->real_capacity_in_bytes; index++)
         {
-            if (index <= swag->size)
+            if (CheckIfDividableByEight(index))
             {
-                fprintf(log_file, "[%zu ELEMENT] %d \n", index, (swag->stack_data)[index]);
+                fprintf(log_file, "\n");
             }
-            else
-            {
-                fprintf(log_file, "[%zu ELEMENT] SWAAAAG \n", index);
-            }
+
+            fprintf(log_file, "[%3.0zu]%4d  ", (size_t) &((swag->canary_start)[index]) % 1000,(swag->canary_start)[index]);
+
         }
     }
-
     return LOG_FUNCTION_SUCCESS;
 }
 
@@ -116,6 +119,74 @@ SwitchDetailLevelTo(enum detalization_levels_e detalization_level)
 {
     DETALIZATION_LEVEL = detalization_level;
 }
+
+//
+// log_function_return_value_e
+// StackDump(stack_t* swag)
+// {
+//     FILE * log_file = GetLogFile();
+//
+//     if ((swag == NULL) || (log_file == NULL))
+//     {
+//         return LOG_FUNCTION_NULL_POINTER_ERROR;
+//     }
+//
+//     if (DETALIZATION_LEVEL >= DETALIZATION_LEVEL_DEBUG)
+//     {
+//         time_t t1 = time(NULL);
+//         tm t = *localtime(&t1);
+//         fprintf(log_file, "\n <%.2d:%.2d:%.2d> \n", t.tm_hour, t.tm_min, t.tm_sec);
+//         fprintf(log_file, "name = %s.\n", swag->name);
+//         fprintf(log_file, "size = %zu.\n", swag->size);
+//         fprintf(log_file, "capacity = %zu.\n", swag->capacity);
+//
+//         switch(swag->state)
+//         {
+//         case STACK_STATE_OK:
+//             fprintf(log_file, "state = OK.\n");
+//             break;
+//
+//         case STACK_STATE_UNINITIALIZED:
+//             fprintf(log_file, "state = UNINITIALIZED.\n");
+//             break;
+//
+//         case STACK_STATE_MEMORY_ERROR:
+//             fprintf(log_file, "state = MEMORY_ERROR.\n");
+//             break;
+//
+//         case STACK_STATE_ZERO_CAPACITY:
+//             fprintf(log_file, "state = ZERO_CAPACITY.\n");
+//             break;
+//
+//         default: break;
+//         }
+//
+//         fprintf(log_file, "----------DATA----------\n");
+//
+//         for (size_t index = 0; index < CANARY_SIZE; index++)
+//         {
+//                 fprintf(log_file, "[CANARY] %d \n", *((byte_t*) (swag->stack_data) - CANARY_SIZE + index));
+//         }
+//
+//         for (size_t index = 0; index < swag->capacity; index++)
+//
+//             if (index < swag->size)
+//             {
+//                 fprintf(log_file, "[%zu ELEMENT] %d \n", index + 1, (((byte_t*)swag->stack_data + CANARY_SIZE   )[index]);
+//             }
+//             else
+//             {
+//                 fprintf(log_file, "[%zu ELEMENT] nothing_here \n", index + 1);
+//             }
+//         }
+//
+//         for (size_t index = 0; index < CANARY_SIZE; index++)
+//         {
+//                 fprintf(log_file, "[CANARY] %d \n", *((byte_t*) (swag->stack_data + swag->capacity) + CANARY_SIZE+ index));
+//         }
+//
+//     return LOG_FUNCTION_SUCCESS;
+// }
 
 
 

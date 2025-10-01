@@ -4,6 +4,9 @@
 #include "stdlib.h"
 #include "string.h"
 
+typedef unsigned char byte_t;
+
+bool CheckIfDividableByEight(size_t value);
 void* recalloc(void*  pointer, size_t current_size, size_t new_size);
 void PrintHelloMessage();
 

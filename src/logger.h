@@ -9,7 +9,7 @@
 
 extern const size_t LOG_BUFFER_SIZE;
 extern char LOG_BUFFER[];
-const char LOG_FILE[] = "log/Logs.txt";
+const char LOG_FILE[] = "logs/Logs.txt";
 
 enum detalization_levels_e
 {

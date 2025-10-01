@@ -2,11 +2,14 @@
 #define STACK_H
 
 #include <stdlib.h>
+
+#include "tools.h"
 #include "logger.h"
 
 typedef int value_type;
 
-const int POLTORASHKA = 228822;
+const char CANARY_SIZE = 1;
+const int CANARY_FILL = 42;
 
 enum stack_function_errors_e
 {
@@ -32,9 +35,12 @@ enum stack_state_e
 struct stack_t
 {
     const char* name;
+    byte_t* canary_start;
+    byte_t* canary_end;
     value_type* stack_data;
     size_t size;
     size_t capacity;
+    size_t real_capacity_in_bytes;
     enum stack_state_e state;
 };
 

@@ -7,6 +7,8 @@
 #include "logger.h"
 #include "tools.h"
 
+#define HARD_SWAG
+
 stack_function_errors_e
 StackInit(stack_t*    swag,
           size_t      expected_capacity,
@@ -22,18 +24,27 @@ StackInit(stack_t*    swag,
         return STACK_FUNCTION_INCORRECT_VALUE_ERROR;
     }
 
-    (swag->stack_data) = (value_type*) calloc(expected_capacity + 2, sizeof(value_type)); //for POLTORASHKA
-    if (swag->stack_data == NULL)
+    swag->real_capacity_in_bytes = sizeof(value_type) * expected_capacity + sizeof(long long) * (2 * CANARY_SIZE + 1);
+    swag->canary_start = (byte_t*) calloc(swag->real_capacity_in_bytes, sizeof(byte_t));
+    if (swag->canary_start == NULL)
     {
         swag->state = STACK_STATE_MEMORY_ERROR;
         return STACK_FUNCTION_MEMORY_ERROR;
     }
 
-    swag->capacity = expected_capacity;
-    swag->state = STACK_STATE_OK;
+    memset(swag->canary_start, CANARY_FILL, sizeof(long long) * CANARY_SIZE);
 
-    (swag->stack_data)[0] = POLTORASHKA;
-    (swag->stack_data)[swag->capacity + 1] = POLTORASHKA;
+    swag->stack_data = (value_type*) (swag->canary_start + sizeof(long long) * CANARY_SIZE);
+    swag->capacity = expected_capacity;
+
+    (swag->canary_end) = (byte_t*) (swag->stack_data + expected_capacity);
+    while (!CheckIfDividableByEight((size_t) swag->canary_end))
+    {
+        (swag->canary_end)++;
+    }
+    memset(swag->canary_end, CANARY_FILL, sizeof(long long) * CANARY_SIZE);
+
+    swag->state = STACK_STATE_OK;
 
     return STACK_FUNCTION_SUCCESS;
 }
@@ -41,7 +52,9 @@ StackInit(stack_t*    swag,
 stack_function_errors_e
 StackDestroy(stack_t* swag)
 {
-    free(swag->stack_data);
+    free(swag->canary_start);
+    swag->canary_start = NULL;
+    swag->canary_end = NULL;
     swag->stack_data = NULL;
 
     swag->state = STACK_STATE_UNINITIALIZED;
@@ -61,16 +74,28 @@ StackPush(stack_t*   swag,
 
     if ((swag->size) == (swag->capacity))
     {
-        (swag->stack_data) = (value_type*) recalloc(swag->stack_data, sizeof(value_type) * (swag->capacity + 2), sizeof(value_type) * (2 * (swag->capacity) + 2));
-        (swag->stack_data)[swag->capacity + 1] = 0;
-        (swag->capacity) *= 2;
-        (swag->stack_data)[swag->capacity + 1] = POLTORASHKA;
+        memset(swag->canary_end, 0, sizeof(long long) * CANARY_SIZE);
+
+        (swag->canary_start) = (byte_t*) recalloc(swag->canary_start, swag->real_capacity_in_bytes, swag->real_capacity_in_bytes + sizeof(value_type) * swag->capacity);
+
+        VERIFY_STACK_WITH_RETURN(swag);
+
+        swag->real_capacity_in_bytes += sizeof(value_type) * swag->capacity;
+
+        swag->stack_data = (value_type*) (swag->canary_start + sizeof(long long) * CANARY_SIZE);
+        swag->capacity *= 2;
+        swag->canary_end = (byte_t*) (swag->stack_data + swag->capacity);
+        while (!CheckIfDividableByEight((size_t) swag->canary_end))
+        {
+            (swag->canary_end)++;
+        }
+        memset(swag->canary_end, CANARY_FILL, sizeof(long long) * CANARY_SIZE);
     }
 
     VERIFY_STACK_WITH_RETURN(swag);
 
-    (swag->size)++;
     (swag->stack_data)[swag->size] = value;
+    (swag->size)++;
 
     return STACK_FUNCTION_SUCCESS;
 }
@@ -89,9 +114,9 @@ StackPop(stack_t*    swag,
         return STACK_FUNCTION_EMPTY_STACK_ERROR;
     }
 
+    (swag->size)--;
     *pop_variable = (swag->stack_data)[swag->size];
     (swag->stack_data)[swag->size] = 0;
-    (swag->size)--;
 
     return STACK_FUNCTION_SUCCESS;
 }
@@ -112,11 +137,11 @@ VerifyStack(stack_t* swag)
     {
         return STACK_FUNCTION_NULL_POINTER_ERROR;
     }
-    else if (((swag->stack_data)[0] != POLTORASHKA) || ((swag->stack_data)[swag->capacity + 1] != POLTORASHKA))
-    {
-        StackDump(swag);
-        return STACK_FUNCTION_MEMORY_ERROR;
-    }
+    // else if (((swag->stack_data)[0] != POLTORASHKA) || ((swag->stack_data)[swag->capacity + 1] != POLTORASHKA)) //ХУЙНЯ-ПЕРЕДЕЛЫВАЙ
+    // {
+    //     StackDump(swag);
+    //     return STACK_FUNCTION_MEMORY_ERROR;
+    // }
     return STACK_FUNCTION_SUCCESS;
 }
 
