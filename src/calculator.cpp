@@ -69,7 +69,6 @@ CalculateStackOut(stack_t*               calculator_stack,
     if (return_error != STACK_FUNCTION_SUCCESS)
     {
         LOG_FUNCTION_ERROR(return_error);
-        // printf("meow1");
         *input_command = CALCULATOR_COMMAND_PROGRAM_ERROR;
         return;
     }

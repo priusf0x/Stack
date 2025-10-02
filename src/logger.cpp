@@ -104,7 +104,7 @@ StackDump(stack_t* swag)
 
         for (size_t index = 0; index < swag->real_capacity_in_bytes; index++)
         {
-            if (CheckIfDividableByEight(index))
+            if (index % 8 == 0)
             {
                 fprintf(log_file, "\n");
             }

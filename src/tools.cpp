@@ -16,16 +16,6 @@ void* recalloc(void*  pointer,
     return pointer;
 }
 
-bool CheckIfDividableByEight(size_t value)
-{
-    if (value % 8)
-    {
-        return false;
-    }
-    return true;
-}
-
-
 void PrintHelloMessage()
 {
     printf(WHITE"    ▄████▄   ▄▄▄       ██▓     ▄████▄  \n"

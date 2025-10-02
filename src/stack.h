@@ -38,6 +38,7 @@ struct stack_t
     value_type* stack_data;
     size_t size;
     size_t capacity;
+    size_t minimal_capacity;
     size_t real_capacity_in_bytes;
     enum stack_state_e state;
 };
@@ -48,6 +49,8 @@ stack_function_errors_e StackPush(stack_t* swag, value_type value);
 stack_function_errors_e StackPop(stack_t* swag, value_type* pop_variable);
 stack_function_errors_e VerifyStack(stack_t* swag);
 bool                    CheckCanary(stack_t* swag);
+stack_function_errors_e SetCanary(void* pointer, uint64_t value);
+stack_function_errors_e StackNormalizeSize(stack_t* swag);
 stack_function_errors_e StackAdd(stack_t* swag);
 stack_function_errors_e StackDiv(stack_t* swag);
 stack_function_errors_e StackSub(stack_t* swag);

@@ -9,8 +9,7 @@
 #include "tools.h"
 
 const size_t CANARY_SIZE = 2;
-const uint8_t CANARY_FILL = 0x2a; //ХУЙНЯ-ПЕРЕДЕЛЫВАЙ - надо ебануть произвольного размера
-const long long CANARY_FILL_8B = 0x2a2a2a2a2a2a2a2a;
+const uint64_t CANARY_FILL = 0xB16B00B5;
 
 stack_function_errors_e
 StackInit(stack_t*    swag,
@@ -28,24 +27,25 @@ StackInit(stack_t*    swag,
     }
 
     swag->real_capacity_in_bytes = sizeof(value_type) * expected_capacity + sizeof(long long) * (2 * CANARY_SIZE + 1);
-    swag->canary_start = (uint8_t*) calloc(swag->real_capacity_in_bytes, sizeof(uint8_t));
+    swag->canary_start = (uint8_t*) calloc(swag->real_capacity_in_bytes, sizeof(uint64_t));
     if (swag->canary_start == NULL)
     {
         swag->state = STACK_STATE_MEMORY_ERROR;
         return STACK_FUNCTION_MEMORY_ERROR;
     }
 
-    memset(swag->canary_start, CANARY_FILL, sizeof(long long) * CANARY_SIZE);
+    SetCanary(swag->canary_start, CANARY_FILL);
 
-    swag->stack_data = (value_type*) (swag->canary_start + sizeof(long long) * CANARY_SIZE);
+    swag->stack_data = (value_type*) (swag->canary_start + sizeof(uint64_t) * CANARY_SIZE);
     swag->capacity = expected_capacity;
+    swag->minimal_capacity = expected_capacity;
 
     swag->canary_end = (uint8_t*) (swag->stack_data + expected_capacity);
-    while (!CheckIfDividableByEight((size_t) swag->canary_end))
+    while ((size_t) swag->canary_end % 8 != 0)
     {
         (swag->canary_end)++;
     }
-    memset(swag->canary_end, CANARY_FILL, sizeof(long long) * CANARY_SIZE);
+    SetCanary(swag->canary_end, CANARY_FILL);
 
     swag->state = STACK_STATE_OK;
 
@@ -70,25 +70,7 @@ StackPush(stack_t*   swag,
 
     VERIFY_STACK_WITH_RETURN(swag);
 
-    if ((swag->size) == (swag->capacity))
-    {
-        memset(swag->canary_end, 0, sizeof(long long) * CANARY_SIZE);
-
-        (swag->canary_start) = (uint8_t*) recalloc(swag->canary_start, swag->real_capacity_in_bytes, swag->real_capacity_in_bytes + sizeof(value_type) * swag->capacity);
-
-        VERIFY_STACK_WITH_RETURN(swag);
-
-        swag->real_capacity_in_bytes += sizeof(value_type) * swag->capacity;
-
-        swag->stack_data = (value_type*) (swag->canary_start + sizeof(long long) * CANARY_SIZE);
-        swag->capacity *= 2;
-        swag->canary_end = (uint8_t*) (swag->stack_data + swag->capacity);
-        while (!CheckIfDividableByEight((size_t) swag->canary_end))
-        {
-            (swag->canary_end)++;
-        }
-        memset(swag->canary_end, CANARY_FILL, sizeof(long long) * CANARY_SIZE);
-    }
+    StackNormalizeSize(swag);
 
     VERIFY_STACK_WITH_RETURN(swag);
 
@@ -105,6 +87,8 @@ StackPop(stack_t*    swag,
     ASSERT(swag != NULL);
 
     VERIFY_STACK_WITH_RETURN(swag);
+
+    StackNormalizeSize(swag);
 
     if ((swag->size) == 0)
     {
@@ -124,7 +108,7 @@ CheckCanary(stack_t* swag)
 {
     for (size_t index = 0; index < CANARY_SIZE; index++)
     {
-        if ((((long long*) swag->canary_start)[index] != CANARY_FILL_8B) || (((long long*) swag->canary_end)[index] != CANARY_FILL_8B))
+        if ((((uint64_t*) swag->canary_start)[index] != CANARY_FILL) || (((uint64_t*) swag->canary_end)[index] != CANARY_FILL))
         {
             return false;
         }
@@ -256,5 +240,60 @@ StackDiv(stack_t* swag)
 
     return STACK_FUNCTION_SUCCESS;
 }
+
+stack_function_errors_e
+StackNormalizeSize(stack_t* swag)
+{
+    if (swag->size == swag->capacity)
+    {
+        SetCanary(swag->canary_end, 0);
+        (swag->canary_start) = (uint8_t*) recalloc(swag->canary_start, swag->real_capacity_in_bytes, swag->real_capacity_in_bytes + sizeof(value_type) * swag->capacity);
+
+        swag->real_capacity_in_bytes += sizeof(value_type) * swag->capacity;
+
+        swag->stack_data = (value_type*) (swag->canary_start + sizeof(uint64_t) * CANARY_SIZE);
+        swag->capacity *= 2;
+
+        swag->canary_end = (uint8_t*) (swag->stack_data + swag->capacity);
+        while ((size_t) swag->canary_end % 8 != 0)
+        {
+            (swag->canary_end)++;
+        }
+        SetCanary(swag->canary_end, CANARY_FILL);
+    }
+    else if((2 * swag->size < swag->capacity) && (swag->capacity > 2 * swag->minimal_capacity))
+    {
+        SetCanary(swag->canary_end, 0);
+
+        (swag->canary_start) = (uint8_t*) realloc(swag->canary_start, swag->real_capacity_in_bytes - sizeof(value_type) * ((swag->capacity) / 2));
+
+        swag->real_capacity_in_bytes -= sizeof(value_type) * swag->capacity / 2;
+
+        swag->stack_data = (value_type*) (swag->canary_start + sizeof(uint64_t) * CANARY_SIZE);
+        swag->capacity -= swag->capacity / 2;
+
+        swag->canary_end = (uint8_t*) (swag->stack_data + swag->capacity);
+        while  ((size_t) swag->canary_end % 8 != 0)
+        {
+            (swag->canary_end)++;
+        }
+        SetCanary(swag->canary_end, CANARY_FILL);
+    }
+
+    return STACK_FUNCTION_SUCCESS;
+}
+
+stack_function_errors_e
+SetCanary(void*    pointer,
+          uint64_t value)
+{
+    for (size_t index = 0; index < CANARY_SIZE; index++)
+    {
+        ((uint64_t*)pointer)[index] = value;
+    }
+
+    return STACK_FUNCTION_SUCCESS;
+}
+
 
 

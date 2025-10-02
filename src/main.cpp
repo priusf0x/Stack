@@ -17,14 +17,9 @@ int main(void)
 
     PrintHelloMessage();
 
-    StackInit(&calculator_stack, 3, "calculator_stack");
+    StackInit(&calculator_stack, 2, "calculator_stack");
 
-    // StartCalculator(&calculator_stack);
-
-    StackPush(&calculator_stack, 41);
-    StackPush(&calculator_stack, 41);
-    StackPush(&calculator_stack, 41);
-    StackPush(&calculator_stack, 41);
+    StartCalculator(&calculator_stack);
 
     StackDump(&calculator_stack);
 
