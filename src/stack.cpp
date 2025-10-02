@@ -2,14 +2,15 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "Assert.h"
 #include "logger.h"
 #include "tools.h"
 
-const char CANARY_SIZE = 3;
-const byte_t CANARY_FILL = 42;
-const long long CANARY_FILL_8B = 0b0010101000101010001010100010101000101010001010100010101000101010;
+const size_t CANARY_SIZE = 2;
+const uint8_t CANARY_FILL = 0x2a; //ХУЙНЯ-ПЕРЕДЕЛЫВАЙ - надо ебануть произвольного размера
+const long long CANARY_FILL_8B = 0x2a2a2a2a2a2a2a2a;
 
 stack_function_errors_e
 StackInit(stack_t*    swag,
@@ -27,7 +28,7 @@ StackInit(stack_t*    swag,
     }
 
     swag->real_capacity_in_bytes = sizeof(value_type) * expected_capacity + sizeof(long long) * (2 * CANARY_SIZE + 1);
-    swag->canary_start = (byte_t*) calloc(swag->real_capacity_in_bytes, sizeof(byte_t));
+    swag->canary_start = (uint8_t*) calloc(swag->real_capacity_in_bytes, sizeof(uint8_t));
     if (swag->canary_start == NULL)
     {
         swag->state = STACK_STATE_MEMORY_ERROR;
@@ -39,7 +40,7 @@ StackInit(stack_t*    swag,
     swag->stack_data = (value_type*) (swag->canary_start + sizeof(long long) * CANARY_SIZE);
     swag->capacity = expected_capacity;
 
-    (swag->canary_end) = (byte_t*) (swag->stack_data + expected_capacity);
+    swag->canary_end = (uint8_t*) (swag->stack_data + expected_capacity);
     while (!CheckIfDividableByEight((size_t) swag->canary_end))
     {
         (swag->canary_end)++;
@@ -55,13 +56,8 @@ stack_function_errors_e
 StackDestroy(stack_t* swag)
 {
     free(swag->canary_start);
-    swag->canary_start = NULL;
-    swag->canary_end = NULL;
-    swag->stack_data = NULL;
 
-    swag->state = STACK_STATE_UNINITIALIZED;
-    swag->capacity = 0;
-    swag->size = 0;
+    memset(swag, 0, sizeof(*swag));
 
     return STACK_FUNCTION_SUCCESS;
 }
@@ -78,7 +74,7 @@ StackPush(stack_t*   swag,
     {
         memset(swag->canary_end, 0, sizeof(long long) * CANARY_SIZE);
 
-        (swag->canary_start) = (byte_t*) recalloc(swag->canary_start, swag->real_capacity_in_bytes, swag->real_capacity_in_bytes + sizeof(value_type) * swag->capacity);
+        (swag->canary_start) = (uint8_t*) recalloc(swag->canary_start, swag->real_capacity_in_bytes, swag->real_capacity_in_bytes + sizeof(value_type) * swag->capacity);
 
         VERIFY_STACK_WITH_RETURN(swag);
 
@@ -86,7 +82,7 @@ StackPush(stack_t*   swag,
 
         swag->stack_data = (value_type*) (swag->canary_start + sizeof(long long) * CANARY_SIZE);
         swag->capacity *= 2;
-        swag->canary_end = (byte_t*) (swag->stack_data + swag->capacity);
+        swag->canary_end = (uint8_t*) (swag->stack_data + swag->capacity);
         while (!CheckIfDividableByEight((size_t) swag->canary_end))
         {
             (swag->canary_end)++;
@@ -160,4 +156,105 @@ VerifyStack(stack_t* swag)
     }
     return STACK_FUNCTION_SUCCESS;
 }
+
+stack_function_errors_e
+StackAdd(stack_t* swag)
+{
+    ASSERT(swag != NULL);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    value_type value_1 = 0;
+    value_type value_2 = 0;
+
+    if (swag->size < 2)
+    {
+        return STACK_FUNCTION_NOT_ENOUGH_ELEMENTS;
+    }
+
+    StackPop(swag, &value_1);
+    StackPop(swag, &value_2);
+
+    StackPush(swag, value_1 + value_2);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    return STACK_FUNCTION_SUCCESS;
+}
+
+stack_function_errors_e
+StackSub(stack_t* swag)
+{
+    ASSERT(swag != NULL);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    value_type value_1 = 0;
+    value_type value_2 = 0;
+
+    if (swag->size < 2)
+    {
+        return STACK_FUNCTION_NOT_ENOUGH_ELEMENTS;
+    }
+
+    StackPop(swag, &value_1);
+    StackPop(swag, &value_2);
+
+    StackPush(swag, value_2 - value_1);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    return STACK_FUNCTION_SUCCESS;
+}
+
+stack_function_errors_e
+StackMul(stack_t* swag)
+{
+    ASSERT(swag != NULL);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    value_type value_1 = 0;
+    value_type value_2 = 0;
+
+    if (swag->size < 2)
+    {
+        return STACK_FUNCTION_NOT_ENOUGH_ELEMENTS;
+    }
+
+    StackPop(swag, &value_1);
+    StackPop(swag, &value_2);
+
+    StackPush(swag, value_1 * value_2);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    return STACK_FUNCTION_SUCCESS;
+}
+
+stack_function_errors_e
+StackDiv(stack_t* swag)
+{
+    ASSERT(swag != NULL);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    value_type value_1 = 0;
+    value_type value_2 = 0;
+
+    if (swag->size < 2)
+    {
+        return STACK_FUNCTION_NOT_ENOUGH_ELEMENTS;
+    }
+
+    StackPop(swag, &value_1);
+    StackPop(swag, &value_2);
+
+    StackPush(swag, value_2 / value_1);
+
+    VERIFY_STACK_WITH_RETURN(swag);
+
+    return STACK_FUNCTION_SUCCESS;
+}
+
 

@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+
 
 #include "stack.h"
 #include "tools.h"
@@ -48,7 +50,7 @@ LogMessage(const char * log_message,
         time_t t1 = time(NULL);
         tm t = *localtime(&t1);
         fprintf(log_file, "\n <%.2d:%.2d:%.2d> ", t.tm_hour, t.tm_min, t.tm_sec);
-        fprintf(log_file, log_message);
+        fprintf(log_file, "%s", log_message);
     }
 
     return LOG_FUNCTION_SUCCESS;
@@ -165,14 +167,14 @@ SwitchDetailLevelTo(enum detalization_levels_e detalization_level)
 //
 //         for (size_t index = 0; index < CANARY_SIZE; index++)
 //         {
-//                 fprintf(log_file, "[CANARY] %d \n", *((byte_t*) (swag->stack_data) - CANARY_SIZE + index));
+//                 fprintf(log_file, "[CANARY] %d \n", *((uint8_t*) (swag->stack_data) - CANARY_SIZE + index));
 //         }
 //
 //         for (size_t index = 0; index < swag->capacity; index++)
 //
 //             if (index < swag->size)
 //             {
-//                 fprintf(log_file, "[%zu ELEMENT] %d \n", index + 1, (((byte_t*)swag->stack_data + CANARY_SIZE   )[index]);
+//                 fprintf(log_file, "[%zu ELEMENT] %d \n", index + 1, (((uint8_t*)swag->stack_data + CANARY_SIZE   )[index]);
 //             }
 //             else
 //             {
@@ -182,7 +184,7 @@ SwitchDetailLevelTo(enum detalization_levels_e detalization_level)
 //
 //         for (size_t index = 0; index < CANARY_SIZE; index++)
 //         {
-//                 fprintf(log_file, "[CANARY] %d \n", *((byte_t*) (swag->stack_data + swag->capacity) + CANARY_SIZE+ index));
+//                 fprintf(log_file, "[CANARY] %d \n", *((uint8_t*) (swag->stack_data + swag->capacity) + CANARY_SIZE+ index));
 //         }
 //
 //     return LOG_FUNCTION_SUCCESS;

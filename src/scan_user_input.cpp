@@ -8,24 +8,17 @@
 #include "color.h"
 #include "stack.h"
 #include "calculator.h"
+#include "commands.h"
 
 const size_t PROGRAM_INPUT_BUFFER_SIZE = 20;
 static char command[PROGRAM_INPUT_BUFFER_SIZE] = {0};
-static const size_t commands_count = 8;
 
-
-calculator_commands_e
-ReadUserInput()
+void
+ReadUserInput(stack_t* swag,
+              calculator_commands_e*  input_command)
 {
-    command_t commands_array[commands_count] = {
-        {.command_name = "HTL",   .return_value = CALCULATOR_COMMAND_HTL},
-        {.command_name = "PUSH",  .return_value = CALCULATOR_COMMAND_PUSH},
-        {.command_name = "OUT",   .return_value = CALCULATOR_COMMAND_OUT},
-        {.command_name = "PRINT", .return_value = CALCULATOR_COMMAND_PRINT},
-        {.command_name = "ADD",   .return_value = CALCULATOR_COMMAND_ADD},
-        {.command_name = "SUB",   .return_value = CALCULATOR_COMMAND_SUB},
-        {.command_name = "MUL",   .return_value = CALCULATOR_COMMAND_MUL},
-        {.command_name = "DIV",   .return_value = CALCULATOR_COMMAND_DIV}};
+    ASSERT(swag != NULL);
+    ASSERT(input_command != NULL);
 
     int character = 0;
     size_t count = 0;
@@ -38,78 +31,62 @@ ReadUserInput()
         command[count] = (char)character;
         count++;
     }
-
     ungetc(character, stdin);
 
     if (count == PROGRAM_INPUT_BUFFER_SIZE)
     {
-        return CALCULATOR_COMMAND_BUFFER_OVERFLOW;
+        *input_command = CALCULATOR_COMMAND_BUFFER_OVERFLOW;
+        return;
     }
 
     for (size_t index = 0; index < commands_count; index++)
     {
+        if ((commands_array[index]).command_name == NULL)
+        {
+            continue;
+        }
         if (strcmp(command, commands_array[index].command_name) == 0)
         {
-            read_command = commands_array[index].return_value;
+            read_command = (commands_array[index]).return_value;
             break;
         }
     }
 
-    switch(read_command)
-    {
-        case CALCULATOR_COMMAND_START:
-            return CALCULATOR_COMMAND_START;
-
-        case CALCULATOR_COMMAND_HTL:
-            return CheckIfSpaces(CALCULATOR_COMMAND_HTL);
-
-        case CALCULATOR_COMMAND_OUT:
-            return CheckIfSpaces(CALCULATOR_COMMAND_OUT);
-
-        case CALCULATOR_COMMAND_PRINT:
-            return CheckIfSpaces(CALCULATOR_COMMAND_PRINT);
-
-        case CALCULATOR_COMMAND_ADD:
-            return CheckIfSpaces(CALCULATOR_COMMAND_ADD);
-
-        case CALCULATOR_COMMAND_SUB:
-            return CheckIfSpaces(CALCULATOR_COMMAND_SUB);
-
-        case CALCULATOR_COMMAND_MUL:
-            return CheckIfSpaces(CALCULATOR_COMMAND_MUL);
-
-        case CALCULATOR_COMMAND_DIV:
-            return CheckIfSpaces(CALCULATOR_COMMAND_DIV);
-
-        case CALCULATOR_COMMAND_PUSH:
-            return CALCULATOR_COMMAND_PUSH;
-
-        case CALCULATOR_COMMAND_INCORRECT_COMMAND:
-            ClearBuffer();
-            return CALCULATOR_COMMAND_INCORRECT_COMMAND;
-
-        case CALCULATOR_COMMAND_BUFFER_OVERFLOW:
-            ClearBuffer();
-            return CALCULATOR_COMMAND_BUFFER_OVERFLOW;
-
-        default:
-            printf("Sorry, Some **** was happened.\n");
-            return CALCULATOR_COMMAND_INCORRECT_COMMAND;
-    }
+    *input_command = read_command;
 }
 
-calculator_commands_e
-ReadCoefficient(value_type* coefficient)
+void
+ReadCoefficient(stack_t*               swag,
+                calculator_commands_e* input_command)
 {
-    ASSERT(coefficient != NULL);
+    ASSERT(swag != NULL);
+    ASSERT(input_command != NULL);
 
-    if (scanf("%d", coefficient) != 1)
+    value_type coefficient = 0;
+
+    if (scanf("%d", &coefficient) != 1)
     {
         ClearBuffer();
-        return CALCULATOR_COMMAND_INCORRECT_COMMAND;
+        *input_command = CALCULATOR_COMMAND_INVALID_SYNTAX;
+        return;
     }
 
-    return CheckIfSpaces(CALCULATOR_COMMAND_START);
+    CheckIfSpaces(input_command);
+    if (*input_command == CALCULATOR_COMMAND_INVALID_SYNTAX)
+    {
+        return;
+    }
+
+    stack_function_errors_e return_error = StackPush(swag, coefficient);
+    if (return_error != STACK_FUNCTION_SUCCESS)
+    {
+        ClearBuffer();
+        LOG_FUNCTION_ERROR(return_error);
+        *input_command = CALCULATOR_COMMAND_PROGRAM_ERROR;
+        return;
+    }
+
+    *input_command = CALCULATOR_COMMAND_START;
 }
 
 bool ClearBuffer()
@@ -127,16 +104,12 @@ bool ClearBuffer()
     return flag;
 }
 
-calculator_commands_e
-CheckIfSpaces(enum calculator_commands_e expected_state)
+void
+CheckIfSpaces(calculator_commands_e* expected_state)
 {
     if (ClearBuffer())
     {
-        return CALCULATOR_COMMAND_INCORRECT_COMMAND;
-    }
-    else
-    {
-        return expected_state;
+        *expected_state = CALCULATOR_COMMAND_INVALID_SYNTAX;
     }
 }
 
